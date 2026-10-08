@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PendaftaranController extends Controller
 {
@@ -14,19 +14,17 @@ class PendaftaranController extends Controller
             'email' => 'required|email|max:255',
             'asal_sekolah' => 'required|string|max:255',
             'jurusan' => 'required|string|max:100',
-            'alasan' => 'required|string',
+            'alasan' => 'required|string|max:2000',
         ]);
 
-        DB::table('mahasiswa_baru')->insert([
-            'nama_lengkap' => $validated['nama_lengkap'],
-            'email' => $validated['email'],
-            'asal_sekolah' => $validated['asal_sekolah'],
-            'jurusan' => $validated['jurusan'],
-            'alasan' => $validated['alasan'],
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        Pendaftaran::create($validated);
 
         return redirect()->route('pendaftaran')->with('success', 'Pendaftaran berhasil dikirim.');
+    }
+
+    public function adminIndex()
+    {
+        $pendaftaran = Pendaftaran::latest()->paginate(15);
+        return view('admin.pendaftaran.index', compact('pendaftaran'));
     }
 }
