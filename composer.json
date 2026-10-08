@@ -1,6 +1,6 @@
 {
     "name": "meuky/prodi-hukum-laravel",
-    "description": "Website profil Program Studi Hukum berbasis Laravel",
+    "description": "Website profil Program Studi Hukum berbasis Laravel untuk skripsi",
     "type": "project",
     "require": {
         "php": "^8.2",
@@ -35,14 +35,6 @@
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ]
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
-        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true
